@@ -1,6 +1,13 @@
 'use strict';
 
 const { fixEmployeeCommand } = require('../../../../app/domain/use-cases/employee');
+const { EmployeeRepository } = require('../../../../app/domain/repositories');
+
+const EMPLOYEE = {
+  id: 'id',
+  email: 'employee@email.com',
+  salary: 10000000,
+};
 
 describe('[use-cases-tests] [fix-employee]', () => {
   describe('[input validation]', () => {
@@ -25,6 +32,30 @@ describe('[use-cases-tests] [fix-employee]', () => {
         expect(err).toMatchObject({
           name: 'ValidationError',
           message: '"id" must be a string',
+        });
+        done();
+      }
+    });
+  });
+
+  describe('[business logic tests]', () => {
+    beforeEach(() => {
+      EmployeeRepository.findById = jest.fn(() => EMPLOYEE);
+    });
+
+    afterEach(() => {
+      EmployeeRepository.findById.mockReset();
+    });
+
+    it("should fail if the repository can't find the employee", async (done) => {
+      EmployeeRepository.findById = jest.fn(() => null);
+      try {
+        await fixEmployeeCommand('whatever');
+        done.fail();
+      } catch (err) {
+        expect(err).toMatchObject({
+          name: 'Error',
+          message: 'Employee not found',
         });
         done();
       }
