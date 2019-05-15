@@ -4,18 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch",
+    "test:coverage": "jest --collectCoverage --runInBand --forceExit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hapi/joi": "^15.0.3"
+    "@hapi/joi": "^15.0.3",
+    "dotenv": "^8.0.0"
   },
   "devDependencies": {
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jest": "^22.5.1",
     "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-security": "^1.4.0",
     "jest": "^24.8.0"
   }
 }
