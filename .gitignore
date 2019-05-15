@@ -1,0 +1,21 @@
+# general
+*node_modules
+*.env
+
+# certificates extensions
+*.key
+*.pem
+*.srl
+*.crt
+*.csr
+*.csr.cnf
+*.ext
+*.dec
+
+# test coverage reports
+*/__tests__/coverage
+
+# vscode
+.vscode/
+
+**tmp
