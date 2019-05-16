@@ -44,7 +44,7 @@ describe('[use-cases-tests] [fix-employee]', () => {
     });
 
     afterEach(() => {
-      EmployeeRepository.findById.mockReset();
+      EmployeeRepository.findById.mockClear();
     });
 
     it("should fail if the repository can't find the employee", async (done) => {
