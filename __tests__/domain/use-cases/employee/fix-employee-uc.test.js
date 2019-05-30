@@ -17,9 +17,17 @@ describe('[use-cases-tests] [fix-employee]', () => {
       }
     });
 
-    it('should fail if id is not a string', async () => {
-      expect(async () => fixEmployeeCommand({ id: 'id' }))
-        .toThrow('"id" must be a string');
+    it('should fail if id is not a string', async (done) => {
+      try {
+        await fixEmployeeCommand({ id: 'id' });
+        done.fail();
+      } catch (err) {
+        expect(err).toMatchObject({
+          name: 'ValidationError',
+          message: '"id" must be a string',
+        });
+        done();
+      }
     });
   });
 });
