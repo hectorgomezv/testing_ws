@@ -61,10 +61,7 @@ describe('[use-cases-tests] [fix-employee]', () => {
         await fixEmployeeCommand('someId');
         done.fail();
       } catch (err) {
-        expect(err).toMatchObject({
-          name: 'Error',
-          message: 'Employee not found',
-        });
+        expect(err).toMatchObject({ message: 'Employee not found' });
         expect(EmployeeRepository.findById).toHaveBeenCalledTimes(1);
         expect(EmployeeRepository.findById).toHaveBeenCalledWith('someId');
         done();
