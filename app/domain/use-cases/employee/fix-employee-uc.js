@@ -13,6 +13,10 @@ async function fixEmployeeCommand (id) {
   await Joi.validate(id, Joi.string().required().label('id'));
 
   const employee = await EmployeeRepository.findById(id);
+  if (!employee) {
+    throw new Error('Employee not found');
+  }
+
   const {
     email,
     salary,
