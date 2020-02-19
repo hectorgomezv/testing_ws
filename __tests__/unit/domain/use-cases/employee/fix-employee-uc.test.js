@@ -1,24 +1,27 @@
 'use strict';
 
-const { fixEmployeeCommand } = require('../../../../app/domain/use-cases/employee');
-const { EmployeeRepository } = require('../../../../app/domain/repositories');
+const faker = require('faker');
+
+const { fixEmployee } = require('../../../../../app/domain/use-cases/employee');
+const { EmployeeRepository } = require('../../../../../app/domain/repositories');
 
 const EMPLOYEE = {
-  id: 'id',
+  id: faker.random.uuid(),
   email: 'employee@accenture.com',
-  salary: 1000000,
+  salary: faker.random.number(),
 };
 
 const FIXED_EMPLOYEE = {
-  id: 'id',
+  ...EMPLOYEE,
   email: 'employee@mobgen.com',
-  salary: 2000000,
+  salary: EMPLOYEE.salary * 2,
 };
+
 
 describe('[use-cases-tests] [fix-employee]', () => {
   describe('[input validation]', () => {
     it('should fail if no id is passed', async () => {
-      await expect(fixEmployeeCommand())
+      await expect(fixEmployee())
         .rejects
         .toMatchObject({
           name: 'ValidationError',
@@ -27,7 +30,7 @@ describe('[use-cases-tests] [fix-employee]', () => {
     });
 
     it('should fail if id is not a string', async () => {
-      await expect(fixEmployeeCommand({ id: 'id' }))
+      await expect(fixEmployee({ id: 'id' }))
         .rejects
         .toMatchObject({
           name: 'ValidationError',
@@ -49,7 +52,7 @@ describe('[use-cases-tests] [fix-employee]', () => {
 
     it("should fail if the repository can't find the employee", async () => {
       EmployeeRepository.findById = jest.fn(() => null);
-      await expect(fixEmployeeCommand('someId'))
+      await expect(fixEmployee('someId'))
         .rejects
         .toMatchObject({ message: 'Employee not found' });
 
@@ -59,7 +62,7 @@ describe('[use-cases-tests] [fix-employee]', () => {
     });
 
     it('should call repository with the fixed employee and return it', async () => {
-      const employee = await fixEmployeeCommand('someId');
+      const employee = await fixEmployee('someId');
       expect(employee).toEqual(FIXED_EMPLOYEE);
 
       // DON'T:

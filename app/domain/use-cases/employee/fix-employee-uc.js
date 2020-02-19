@@ -9,7 +9,7 @@ const { EmployeeRepository } = require('../../repositories');
  * @returns {Employee} employee fixed.
  * @throws Error if the operation fails.
  */
-async function fixEmployeeCommand (id) {
+async function fixEmployee (id) {
   await Joi.validate(id, Joi.string().required().label('id'));
 
   const employee = await EmployeeRepository.findById(id);
@@ -32,4 +32,4 @@ async function fixEmployeeCommand (id) {
   );
 }
 
-module.exports = fixEmployeeCommand;
+module.exports = fixEmployee;
