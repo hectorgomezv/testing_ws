@@ -61,9 +61,11 @@ describe('[use-cases-tests] [fix-employee]', () => {
     it('should call repository with the fixed employee and return it', async () => {
       const employee = await fixEmployeeCommand('someId');
       expect(employee).toEqual(FIXED_EMPLOYEE);
+
       // DON'T:
       // expect(EmployeeRepository.findById).toHaveBeenCalledTimes(1);
       // expect(EmployeeRepository.findById).toHaveBeenCalledWith('someId');
+
       expect(EmployeeRepository.updateEmailAndSalary).toHaveBeenCalledTimes(1);
       expect(EmployeeRepository.updateEmailAndSalary)
         .toHaveBeenCalledWith('someId', FIXED_EMPLOYEE.email, FIXED_EMPLOYEE.salary);
