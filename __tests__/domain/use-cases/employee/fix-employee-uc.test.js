@@ -26,7 +26,7 @@ describe('[use-cases-tests] [fix-employee]', () => {
         });
     });
 
-    it('should fail if id is not a string', async (done) => {
+    it('should fail if id is not a string', async () => {
       await expect(fixEmployeeCommand({ id: 'id' }))
         .rejects
         .toMatchObject({
