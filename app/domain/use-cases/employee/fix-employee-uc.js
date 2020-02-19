@@ -6,8 +6,8 @@
  * @returns {Employee} employee fixed.
  * @throws Error if the operation fails.
  */
-async function fixEmployeeCommand (id) {
+async function fixEmployee (id) {
   return { result: 'To be implemented' };
 }
 
-module.exports = fixEmployeeCommand;
+module.exports = fixEmployee;

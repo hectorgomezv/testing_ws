@@ -1,7 +1,7 @@
 'use strict';
 
-const fixEmployeeCommand = require('./fix-employee-uc');
+const fixEmployee = require('./fix-employee-uc');
 
 module.exports = {
-  fixEmployeeCommand,
+  fixEmployee,
 };
