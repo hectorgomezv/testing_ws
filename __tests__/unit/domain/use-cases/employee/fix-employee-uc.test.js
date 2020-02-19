@@ -1,18 +1,20 @@
 'use strict';
 
+const faker = require('faker');
+
 const { fixEmployee } = require('../../../../../app/domain/use-cases/employee');
 const { EmployeeRepository } = require('../../../../../app/domain/repositories');
 
 const EMPLOYEE = {
-  id: 'id',
+  id: faker.random.uuid(),
   email: 'employee@accenture.com',
-  salary: 1000000,
+  salary: faker.random.number(),
 };
 
 const FIXED_EMPLOYEE = {
-  id: 'id',
+  ...EMPLOYEE,
   email: 'employee@mobgen.com',
-  salary: 2000000,
+  salary: EMPLOYEE.salary * 2,
 };
 
 
