@@ -47,24 +47,23 @@ describe('[use-cases-tests] [fix-employee]', () => {
       EmployeeRepository.updateEmailAndSalary.mockClear();
     });
 
-    it("should fail if the repository can't find the employee", async (done) => {
+    it("should fail if the repository can't find the employee", async () => {
       EmployeeRepository.findById = jest.fn(() => null);
-      try {
-        await fixEmployeeCommand('someId');
-        done.fail();
-      } catch (err) {
-        expect(err).toMatchObject({ message: 'Employee not found' });
-        expect(EmployeeRepository.findById).toHaveBeenCalledTimes(1);
-        expect(EmployeeRepository.findById).toHaveBeenCalledWith('someId');
-        done();
-      }
+      await expect(fixEmployeeCommand('someId'))
+        .rejects
+        .toMatchObject({ message: 'Employee not found' });
+
+      // DON'T:
+      // expect(EmployeeRepository.findById).toHaveBeenCalledTimes(1);
+      // expect(EmployeeRepository.findById).toHaveBeenCalledWith('someId');
     });
 
     it('should call repository with the fixed employee and return it', async () => {
       const employee = await fixEmployeeCommand('someId');
       expect(employee).toEqual(FIXED_EMPLOYEE);
-      expect(EmployeeRepository.findById).toHaveBeenCalledTimes(1);
-      expect(EmployeeRepository.findById).toHaveBeenCalledWith('someId');
+      // DON'T:
+      // expect(EmployeeRepository.findById).toHaveBeenCalledTimes(1);
+      // expect(EmployeeRepository.findById).toHaveBeenCalledWith('someId');
       expect(EmployeeRepository.updateEmailAndSalary).toHaveBeenCalledTimes(1);
       expect(EmployeeRepository.updateEmailAndSalary)
         .toHaveBeenCalledWith('someId', FIXED_EMPLOYEE.email, FIXED_EMPLOYEE.salary);
