@@ -17,11 +17,6 @@
     "jest"
   ],
   "rules": {
-    "space-before-function-paren": ["error", {
-      "anonymous": "always",
-      "named": "always",
-      "asyncArrow": "always"
-    }],
     "comma-dangle": ["error", {
       "arrays": "always-multiline",
       "exports": "always-multiline",

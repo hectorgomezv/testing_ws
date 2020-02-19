@@ -5,14 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watch",
-    "test:coverage": "jest --collectCoverage --runInBand --forceExit"
+    "test:coverage": "jest --collectCoverage --runInBand --forceExit",
+    "dev": "./node_modules/.bin/nodemon index"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^15.0.3",
-    "dotenv": "^8.0.0"
+    "dotenv": "^8.2.0",
+    "fastify": "^2.12.0",
+    "mongoose": "^5.9.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
@@ -22,7 +25,8 @@
     "eslint-plugin-node": "^9.0.1",
     "eslint-plugin-security": "^1.4.0",
     "faker": "^4.1.0",
-    "jest": "^25.1.0"
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2"
   },
   "jest": {
     "testEnvironment": "node",
